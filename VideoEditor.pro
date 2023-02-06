@@ -4,7 +4,7 @@
 
 TEMPLATE = app
 TARGET = VideoEditor
-INCLUDEPATH += .
+#INCLUDEPATH += /usr/include/c++/11 /usr/include/c++/11/tr1
 QT += gui core widgets multimedia multimediawidgets
 
 # The following define makes your compiler warn you if you use any
