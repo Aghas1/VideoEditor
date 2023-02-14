@@ -13,6 +13,8 @@
 #include <QDir>
 #include <QMessageBox>
 #include <videocut.h>
+#include <QAbstractSlider>
+#include <QSlider>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -48,6 +50,7 @@ private:
     QTimer* timer;
     std::string s_videoLength;
     int l_videoLength[3];
+    int i_videoLength;
     std::string currentVideoPath;
 };
 #endif // MAINWINDOW_H

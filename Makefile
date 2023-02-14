@@ -54,13 +54,17 @@ OBJECTS_DIR   = ../tmp/
 
 SOURCES       = main.cpp \
 		mainwindow.cpp \
-		videocut.cpp ../tmp/moc_mainwindow.cpp \
-		../tmp/moc_videocut.cpp
+		videocut.cpp \
+		rangeslider.cpp ../tmp/moc_mainwindow.cpp \
+		../tmp/moc_videocut.cpp \
+		../tmp/moc_rangeslider.cpp
 OBJECTS       = ../tmp/main.o \
 		../tmp/mainwindow.o \
 		../tmp/videocut.o \
+		../tmp/rangeslider.o \
 		../tmp/moc_mainwindow.o \
-		../tmp/moc_videocut.o
+		../tmp/moc_videocut.o \
+		../tmp/moc_rangeslider.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -139,9 +143,11 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		VideoEditor.pro mainwindow.h \
-		videocut.h main.cpp \
+		videocut.h \
+		rangeslider.h main.cpp \
 		mainwindow.cpp \
-		videocut.cpp
+		videocut.cpp \
+		rangeslider.cpp
 QMAKE_TARGET  = VideoEditor
 DESTDIR       = ../exe/
 TARGET        = ../exe/VideoEditor
@@ -326,8 +332,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h videocut.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp videocut.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h videocut.h rangeslider.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp videocut.cpp rangeslider.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.ui videocut.ui $(DISTDIR)/
 
 
@@ -360,19 +366,26 @@ compiler_moc_predefs_clean:
 ../tmp/moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -Wall -W -dM -E -o ../tmp/moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: ../tmp/moc_mainwindow.cpp ../tmp/moc_videocut.cpp
+compiler_moc_header_make_all: ../tmp/moc_mainwindow.cpp ../tmp/moc_videocut.cpp ../tmp/moc_rangeslider.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) ../tmp/moc_mainwindow.cpp ../tmp/moc_videocut.cpp
+	-$(DEL_FILE) ../tmp/moc_mainwindow.cpp ../tmp/moc_videocut.cpp ../tmp/moc_rangeslider.cpp
 ../tmp/moc_mainwindow.cpp: mainwindow.h \
 		videocut.h \
+		rangeslider.h \
 		../tmp/moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/aghasi_m/Aghas/tmp/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/aghasi_m/Aghas/VideoEditor -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtMultimediaWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o ../tmp/moc_mainwindow.cpp
 
 ../tmp/moc_videocut.cpp: videocut.h \
+		rangeslider.h \
 		../tmp/moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/aghasi_m/Aghas/tmp/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/aghasi_m/Aghas/VideoEditor -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtMultimediaWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include videocut.h -o ../tmp/moc_videocut.cpp
+
+../tmp/moc_rangeslider.cpp: rangeslider.h \
+		../tmp/moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/aghasi_m/Aghas/tmp/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/aghasi_m/Aghas/VideoEditor -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtMultimediaWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include rangeslider.h -o ../tmp/moc_rangeslider.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -400,23 +413,32 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 ####### Compile
 
 ../tmp/main.o: main.cpp mainwindow.h \
-		videocut.h
+		videocut.h \
+		rangeslider.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../tmp/main.o main.cpp
 
 ../tmp/mainwindow.o: mainwindow.cpp mainwindow.h \
 		videocut.h \
+		rangeslider.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../tmp/mainwindow.o mainwindow.cpp
 
 ../tmp/videocut.o: videocut.cpp videocut.h \
+		rangeslider.h \
 		ui_videocut.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../tmp/videocut.o videocut.cpp
+
+../tmp/rangeslider.o: rangeslider.cpp rangeslider.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../tmp/rangeslider.o rangeslider.cpp
 
 ../tmp/moc_mainwindow.o: ../tmp/moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../tmp/moc_mainwindow.o ../tmp/moc_mainwindow.cpp
 
 ../tmp/moc_videocut.o: ../tmp/moc_videocut.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../tmp/moc_videocut.o ../tmp/moc_videocut.cpp
+
+../tmp/moc_rangeslider.o: ../tmp/moc_rangeslider.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../tmp/moc_rangeslider.o ../tmp/moc_rangeslider.cpp
 
 ####### Install
 

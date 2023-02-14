@@ -48,11 +48,11 @@ void MainWindow::setTimer()
 
 void MainWindow::setVideo()
 {
-    qint64 videoDuration = player->duration();
-    qDebug() << "setVideo: duration: " << videoDuration;
+    i_videoLength = player->duration();
+    qDebug() << "setVideo: duration: " << i_videoLength;
     int remainder;
-    l_videoLength[0] = videoDuration / 3600000;
-    remainder = videoDuration - l_videoLength[0] * 3600000;
+    l_videoLength[0] = i_videoLength / 3600000;
+    remainder = i_videoLength - l_videoLength[0] * 3600000;
     l_videoLength[1] = remainder / 60000;
     remainder = remainder - l_videoLength[1] * 60000;
     l_videoLength[2] = remainder / 1000;
@@ -123,6 +123,6 @@ void MainWindow::on_Cut_action()
         return;
     }
     emit videoChanged();
-    VideoCut* cutWindow = new VideoCut(currentVideoPath, l_videoLength);
+    VideoCut* cutWindow = new VideoCut(currentVideoPath, l_videoLength, i_videoLength);
     cutWindow->show();
 }

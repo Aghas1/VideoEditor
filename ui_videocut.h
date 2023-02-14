@@ -15,6 +15,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTimeEdit>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -24,7 +25,8 @@ class Ui_VideoCut
 public:
     QPushButton *pushButton;
     QPushButton *pushButton_2;
-    QWidget *widget;
+    QWidget *verticalLayoutWidget;
+    QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
     QLabel *label;
     QTimeEdit *timeEdit;
@@ -42,13 +44,15 @@ public:
         pushButton_2 = new QPushButton(VideoCut);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
         pushButton_2->setGeometry(QRect(220, 190, 80, 23));
-        widget = new QWidget(VideoCut);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(30, 70, 301, 31));
-        horizontalLayout = new QHBoxLayout(widget);
+        verticalLayoutWidget = new QWidget(VideoCut);
+        verticalLayoutWidget->setObjectName(QString::fromUtf8("verticalLayoutWidget"));
+        verticalLayoutWidget->setGeometry(QRect(10, 20, 371, 121));
+        verticalLayout = new QVBoxLayout(verticalLayoutWidget);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(widget);
+        label = new QLabel(verticalLayoutWidget);
         label->setObjectName(QString::fromUtf8("label"));
         QFont font;
         font.setPointSize(11);
@@ -59,12 +63,12 @@ public:
 
         horizontalLayout->addWidget(label);
 
-        timeEdit = new QTimeEdit(widget);
+        timeEdit = new QTimeEdit(verticalLayoutWidget);
         timeEdit->setObjectName(QString::fromUtf8("timeEdit"));
 
         horizontalLayout->addWidget(timeEdit);
 
-        label_2 = new QLabel(widget);
+        label_2 = new QLabel(verticalLayoutWidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setFont(font);
         label_2->setLayoutDirection(Qt::LeftToRight);
@@ -72,10 +76,13 @@ public:
 
         horizontalLayout->addWidget(label_2);
 
-        timeEdit_2 = new QTimeEdit(widget);
+        timeEdit_2 = new QTimeEdit(verticalLayoutWidget);
         timeEdit_2->setObjectName(QString::fromUtf8("timeEdit_2"));
 
         horizontalLayout->addWidget(timeEdit_2);
+
+
+        verticalLayout->addLayout(horizontalLayout);
 
 
         retranslateUi(VideoCut);
