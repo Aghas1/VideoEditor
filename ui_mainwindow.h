@@ -20,6 +20,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTimeEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -36,6 +37,9 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
     QSlider *slider;
+    QHBoxLayout *layout_cut;
+    QTimeEdit *timeEdit;
+    QTimeEdit *timeEdit_2;
     QHBoxLayout *horizontalLayout;
     QPushButton *Play;
     QPushButton *Pause;
@@ -61,7 +65,7 @@ public:
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(6, 0, 6, -1);
+        horizontalLayout_2->setContentsMargins(6, 6, 6, 6);
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
         label->setMinimumSize(QSize(65, 20));
@@ -78,9 +82,25 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_2);
 
+        layout_cut = new QHBoxLayout();
+        layout_cut->setObjectName(QString::fromUtf8("layout_cut"));
+        layout_cut->setContentsMargins(6, 6, 6, 6);
+        timeEdit = new QTimeEdit(centralwidget);
+        timeEdit->setObjectName(QString::fromUtf8("timeEdit"));
+
+        layout_cut->addWidget(timeEdit);
+
+        timeEdit_2 = new QTimeEdit(centralwidget);
+        timeEdit_2->setObjectName(QString::fromUtf8("timeEdit_2"));
+
+        layout_cut->addWidget(timeEdit_2);
+
+
+        verticalLayout->addLayout(layout_cut);
+
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setContentsMargins(6, -1, 6, -1);
+        horizontalLayout->setContentsMargins(6, 6, 6, 6);
         Play = new QPushButton(centralwidget);
         Play->setObjectName(QString::fromUtf8("Play"));
 

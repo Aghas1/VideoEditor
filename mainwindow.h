@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <unistd.h>
 #include <QMainWindow>
 #include <QWidget>
 #include <QObject>
@@ -15,6 +16,7 @@
 #include <videocut.h>
 #include <QAbstractSlider>
 #include <QSlider>
+#include <QHBoxLayout>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -29,6 +31,7 @@ public:
     ~MainWindow();
     void setConnects();
     void setTimer();
+    void debug(std::string message);
 
 signals:
     void videoChanged();
@@ -42,15 +45,21 @@ private slots:
     void on_Open_action();
     void on_Save_action();
     void on_Cut_action();
+    void cut_active(bool activ);
+    void on_lowerValueChanged(int value);
+    void on_upperValueChanged(int value);
+
 
 private:
     Ui::MainWindow *ui;
     QMediaPlayer* player = new QMediaPlayer;
-    QVideoWidget* vw;
+    QVideoWidget* videoViewer;
     QTimer* timer;
     std::string s_videoLength;
     int l_videoLength[3];
     int i_videoLength;
     std::string currentVideoPath;
+    RangeSlider* rsH;
+    bool in_Cut_State = false;
 };
 #endif // MAINWINDOW_H
