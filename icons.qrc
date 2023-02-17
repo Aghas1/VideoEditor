@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/play_icon.jpeg</file>
+        <file>icons/pause_icon.jpeg</file>
+        <file>icons/sound_max.jpeg</file>
+        <file>icons/sound_off.jpeg</file>
+        <file>icons/sound_on.jpeg</file>
+        <file>icons/stop_icon.jpeg</file>
+    </qresource>
+</RCC>

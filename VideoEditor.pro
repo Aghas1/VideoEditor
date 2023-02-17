@@ -19,11 +19,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # Input
-HEADERS += mainwindow.h videocut.h \
-    rangeslider.h
-FORMS += mainwindow.ui videocut.ui
-SOURCES += main.cpp mainwindow.cpp videocut.cpp \
-    rangeslider.cpp
+HEADERS += mainwindow.h rangeslider.h
+FORMS += mainwindow.ui
+SOURCES += main.cpp mainwindow.cpp rangeslider.cpp
+
+# Output
 DESTDIR = /home/aghasi_m/Aghas/exe
 OBJECTS_DIR = /home/aghasi_m/Aghas/tmp
 MOC_DIR = /home/aghasi_m/Aghas/tmp
+
+RESOURCES += \
+    icons.qrc

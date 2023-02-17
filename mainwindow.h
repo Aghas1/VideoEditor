@@ -2,21 +2,19 @@
 #define MAINWINDOW_H
 
 #include <unistd.h>
+#include <string>
+#include <thread>
+
 #include <QMainWindow>
 #include <QWidget>
-#include <QObject>
 #include <QMediaPlayer>
 #include <QVideoWidget>
 #include <QDebug>
-#include <string>
 #include <QTimer>
 #include <QFileDialog>
-#include <QDir>
 #include <QMessageBox>
-#include <videocut.h>
-#include <QAbstractSlider>
-#include <QSlider>
-#include <QHBoxLayout>
+#include <rangeslider.h>
+#include <QProcess>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -27,7 +25,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(int accessToRedactor, QWidget *parent = nullptr);
     ~MainWindow();
     void setConnects();
     void setTimer();
@@ -39,27 +37,35 @@ signals:
 private slots:
     void setVideo();
     void on_Play_clicked();
-    void on_Pause_clicked();
     void on_Stop_clicked();
+    void on_Sound_clicked();
     void on_Slider_moved(int pos);
     void on_Open_action();
     void on_Save_action();
     void on_Cut_action();
-    void cut_active(bool activ);
+    void cut_active(bool state);
     void on_lowerValueChanged(int value);
     void on_upperValueChanged(int value);
+    void on_valueChanged(int value);
+    void on_boxVideoChanged(int state);
+    void on_boxAudioChanged(int state);
 
 
 private:
+    QProcess* proc;
     Ui::MainWindow *ui;
     QMediaPlayer* player = new QMediaPlayer;
     QVideoWidget* videoViewer;
     QTimer* timer;
+    int accesRedactorMode;
+
+    std::string currentVideoPath;
     std::string s_videoLength;
     int l_videoLength[3];
     int i_videoLength;
-    std::string currentVideoPath;
-    RangeSlider* rsH;
+
     bool in_Cut_State = false;
+    bool isPlaying = false;
+    RangeSlider* rsH;
 };
 #endif // MAINWINDOW_H
