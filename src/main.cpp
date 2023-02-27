@@ -5,7 +5,11 @@
 int main(int argc, char *argv[])
 {
     QProcess* proc = new QProcess();
-    int exitCode = proc->execute("/home/aghasi_m/Aghas/VideoEditor/install.sh");
+    std::string exePath = argv[0];
+    int index = exePath.find_last_of('/');
+    exePath.erase(index);
+    exePath += "/install.sh";
+    int exitCode = proc->execute(exePath.c_str());
     QApplication a(argc, argv);
     MainWindow w(exitCode);
     w.show();
